@@ -3,7 +3,6 @@ const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');  //Give us the access for the cookies
 const passport = require('passport'); //Tells the passport to make use of cookie. 
 const keys = require('./config/keys');
-const env =require('env')
 require('./models/User');
 require('./services/passport');
 
