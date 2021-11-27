@@ -23,15 +23,16 @@ passport.use(
             clientID: keys.googleClientID,
             clientSecret: keys.googleClientSecret,
             callbackURL: '/auth/google/callback',  //user will rerouted to this route after google provides permission
-            proxy: true
-        }, (accessToken, refreshToken, profile, done) => {
-            User.findOne({googleID: profile.id}).then((existingUser)=>{
+            proxy: true,
+        },
+        (accessToken, refreshToken, profile, done) => {
+            User.findOne({ googleID: profile.id }).then((existingUser)=>{
                 if (existingUser){
                     //we alredy have a document with the given profile ID
                     done(null, existingUser)
                 }
                 else {
-                    new User ({ googleID: profile.id })
+                    new User ({ googleId: profile.id })
                     .save() // We don't have user document with this ID, saving  as a new document
                     .then((user) => { done(null, user)})
             }

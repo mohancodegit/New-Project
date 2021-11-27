@@ -1,4 +1,3 @@
-const cookieSession = require('cookie-session');
 const passport = require('passport');
 
 module.exports = (app) => {
