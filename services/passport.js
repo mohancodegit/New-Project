@@ -8,7 +8,7 @@ const User = mongoose.model('users');
 //Two argument means, we trying to load something in mongoose
 
 passport.serializeUser((user, done) => {
-    done(null, user._id);
+    done(null, user.id);
 }) 
 
 passport.deserializeUser((id, done) => {
@@ -22,7 +22,8 @@ passport.use(
         {
             clientID: keys.googleClientID,
             clientSecret: keys.googleClientSecret,
-            callbackURL: '/auth/google/callback'  //user will rerouted to this route ater google provides permission
+            callbackURL: '/auth/google/callback',  //user will rerouted to this route after google provides permission
+            proxy: true
         }, (accessToken, refreshToken, profile, done) => {
             User.findOne({googleID: profile.id}).then((existingUser)=>{
                 if (existingUser){
